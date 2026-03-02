@@ -1,0 +1,372 @@
+<!DOCTYPE html><html lang="en"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us — Journey With My Angel</title>
+  <style>
+    :root {
+      --yellow: #FFD54F;
+      --accent: #2E1F1C;
+      --card: rgba(255,255,255,.78);
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; background: var(--yellow); color: var(--accent);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .wrap {
+      min-height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start; padding: 40px 20px 0;
+    }
+    .card {
+      width: min(680px, 100%); background: var(--card);
+      backdrop-filter: saturate(120%) blur(4px);
+      border-radius: 26px; box-shadow: 0 20px 40px rgba(0,0,0,.12);
+      padding: 36px 30px 30px;
+    }
+    .head { display: flex; gap: 14px; align-items: center; margin-bottom: 20px; }
+    .title { font-weight: 700; font-size: 28px; margin: 0; }
+    .sub { opacity: .85; margin: 2px 0 0; }
+
+    .intro { font-size: 16px; line-height: 1.7; margin: 0 0 24px; }
+
+    /* Contact Info Cards */
+    .info-grid {
+      display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 28px;
+    }
+    @media (min-width: 500px) {
+      .info-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .info-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: rgba(255,255,255,.92); border: 2px solid var(--accent);
+      border-radius: 18px; padding: 16px;
+    }
+    .info-icon {
+      flex-shrink: 0; width: 40px; height: 40px; background: var(--accent);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    }
+    .info-icon svg { width: 20px; height: 20px; stroke: var(--yellow); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .info-label { font-size: 13px; opacity: .65; margin: 0 0 2px; }
+    .info-value { font-weight: 600; font-size: 15px; margin: 0; }
+    .info-value a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Form */
+    .form-title { font-size: 20px; font-weight: 700; margin: 0 0 6px; }
+    .form-sub { font-size: 14px; opacity: .7; margin: 0 0 18px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; box-sizing: border-box;
+      border: 2px solid var(--accent); background: rgba(255,255,255,.92);
+      color: var(--accent); border-radius: 14px; padding: 12px 14px;
+      font-size: 15px; font-family: inherit; outline: none;
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      box-shadow: 0 0 0 3px rgba(46,31,28,.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row {
+      display: grid; grid-template-columns: 1fr; gap: 16px;
+    }
+    @media (min-width: 500px) {
+      .form-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    .submit-btn {
+      display: inline-block; background: var(--accent); color: var(--yellow);
+      border: none; border-radius: 14px; padding: 14px 28px;
+      font-weight: 800; font-size: 16px; cursor: pointer;
+      transition: filter .15s ease, transform .12s ease;
+      font-family: inherit;
+    }
+    .submit-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+
+    /* Success message */
+    .success-msg {
+      display: none; background: #e8f5e9; border: 2px solid #4caf50;
+      border-radius: 14px; padding: 16px 18px; margin-top: 16px;
+      font-weight: 600; color: #2e7d32;
+    }
+    .success-msg.show { display: block; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 20px; font-weight: 600; font-size: 15px;
+      color: var(--accent); text-decoration: none; opacity: .8;
+      transition: opacity .15s;
+    }
+    .back-link:hover { opacity: 1; }
+
+    /* FAQ */
+    .faq { margin-top: 28px; border-top: 2px solid rgba(46,31,28,.12); padding-top: 24px; }
+    .faq-title { font-size: 20px; font-weight: 700; margin: 0 0 16px; }
+    .faq-item { margin-bottom: 14px; }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%; background: rgba(255,255,255,.92); border: 2px solid var(--accent);
+      border-radius: 14px; padding: 14px 16px; font-weight: 600; font-size: 15px;
+      cursor: pointer; font-family: inherit; color: var(--accent);
+      transition: background .2s;
+    }
+    .faq-q:hover { background: #fff; }
+    .faq-q .arrow { transition: transform .25s ease; font-size: 18px; }
+    .faq-q.open .arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease;
+      padding: 0 16px; font-size: 15px; line-height: 1.65; opacity: .85;
+    }
+    .faq-a.open { max-height: 200px; padding: 10px 16px 4px; }
+
+    /* Footer */
+    .site-footer {
+      width: 100%; max-width: 680px; margin-top: 32px; padding: 24px 8px 28px;
+      text-align: center; font-size: 12px; line-height: 1.7; color: var(--accent); opacity: .72;
+    }
+    .site-footer p { margin: 0 0 10px; }
+    .footer-links {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px;
+      margin-bottom: 14px; padding: 0; list-style: none;
+    }
+    .footer-links a {
+      color: var(--accent); text-decoration: underline; text-underline-offset: 2px;
+      font-weight: 500; transition: opacity .15s;
+    }
+    .footer-links a:hover { opacity: 1; }
+    .footer-divider {
+      width: 60px; height: 1px; background: var(--accent); opacity: .25;
+      margin: 0 auto 14px; border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <!-- Header -->
+      <div class="head">
+        <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="">
+          <circle cx="32" cy="26" r="3"></circle>
+          <ellipse cx="32" cy="16" rx="10" ry="3.5"></ellipse>
+          <path d="M10 28c7 6 14 9 22 9s15-3 22-9"></path>
+          <path d="M32 29v18"></path>
+          <path d="M24 47l8-12 8 12"></path>
+          <circle cx="12" cy="34" r="1"></circle>
+          <circle cx="52" cy="34" r="1"></circle>
+        </svg>
+        <div>
+          <h1 class="title">Contact Us</h1>
+          <p class="sub">Journey With My Angel</p>
+        </div>
+      </div>
+
+      <p class="intro">
+        We'd love to hear from you. Whether you have a question about your angelic reading,
+        need help with your order, or simply want to share your experience — our team is here
+        to support your spiritual journey. Please allow up to 48 hours for a response.
+      </p>
+
+      <!-- Contact Info -->
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <p class="info-label">Email</p>
+            <p class="info-value"><a href="mailto:support@journeywithmyangel.online">support@journeywithmyangel.online</a></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div>
+            <p class="info-label">Response Time</p>
+            <p class="info-value">Within 24–48 hours</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <h2 class="form-title">Send Us a Message</h2>
+      <p class="form-sub">Fill out the form below and we'll get back to you as soon as possible.</p>
+
+      <form id="contactForm" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Your first name" required="">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Your last name" required="">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" required="">
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" required="">
+            <option value="" disabled="" selected="">Select a topic</option>
+            <option value="order">Order / Payment Issue</option>
+            <option value="refund">Refund Request</option>
+            <option value="reading">Question About My Reading</option>
+            <option value="technical">Technical Issue</option>
+            <option value="feedback">Feedback / Testimonial</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Write your message here..." required=""></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message ✦</button>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        ✓ Your message has been sent successfully! We'll get back to you within 24–48 hours. Thank you for reaching out.
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="faq">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How long does it take to get a response?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-a">
+            We typically respond within 24 to 48 hours during business days. For urgent payment-related issues, please include your order number in the message.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How can I request a refund?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-a">
+            Select "Refund Request" in the subject dropdown above and include your order email and reason. You can also review our full <a href="https://journeywithmyangel.online/refund-policy" target="_blank" rel="noopener" style="color:var(--accent)">Refund Policy</a>.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            I didn't receive my angelic reading — what should I do?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-a">
+            Please check your spam/junk folder first. If you still can't find it, send us a message with the email you used during checkout and we'll resend it right away.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Is my personal information safe?
+            <span class="arrow">▾</span>
+          </button>
+          <div class="faq-a">
+            Absolutely. We respect your privacy and never share your personal data with third parties. All payments are processed securely through Explodely's encrypted gateway.
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="back-link" onclick="history.back(); return false;">← Back to previous page</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <hr class="footer-divider">
+      <p>
+        The information provided on this website — including quizzes, spiritual readings, and angelic insights —
+        is for general informational and entertainment purposes only. It does not constitute professional, medical,
+        psychological, or religious advice. We do not guarantee the accuracy, completeness, or applicability of any
+        spiritual content displayed. Individual experiences may vary. You should consult qualified professionals
+        before making decisions related to health, financial, or personal well-being matters.
+      </p>
+      <p>
+        Explodely is the trusted payment gateway for Journey With My Angel.
+        Explodely is a trademark of Explodely LLC, a US corporation located at
+        1317 Edgewater Drive Suite #4648, Orlando FL, 32804, United States, and is used by permission.
+        Explodely's role as a gateway provider does not constitute an endorsement, approval,
+        or review of this product(s) or any claim, statement, or opinion used in the promotion of this product(s).
+      </p>
+      <nav>
+        <ul class="footer-links">
+          <li><a href="https://journeywithmyangel.online/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></li>
+          <li><a href="https://journeywithmyangel.online/disclaimer" target="_blank" rel="noopener">Disclaimer</a></li>
+          <li><a href="https://journeywithmyangel.online/ftc-compliance" target="_blank" rel="noopener">FTC Compliance</a></li>
+          <li><a href="https://journeywithmyangel.online/refund-policy" target="_blank" rel="noopener">Refund Policy</a></li>
+        </ul>
+      </nav>
+      <p>© <span id="footer-year"></span> Journey With My Angel. All rights reserved.</p>
+      <p>Contact: <a href="mailto:support@journeywithmyangel.online" style="color:var(--accent)">support@journeywithmyangel.online</a></p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value.trim();
+
+      if (!firstName || !lastName || !email || !subject || !message) return;
+
+      // Show success message
+      document.getElementById('submitBtn').textContent = 'Sent ✓';
+      document.getElementById('submitBtn').disabled = true;
+      document.getElementById('submitBtn').style.opacity = '0.6';
+      document.getElementById('successMsg').classList.add('show');
+
+      // Reset form
+      this.reset();
+
+      // Re-enable after 5s
+      setTimeout(() => {
+        document.getElementById('submitBtn').textContent = 'Send Message ✦';
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').style.opacity = '1';
+      }, 5000);
+    });
+
+    // FAQ toggle
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = btn.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+
+      if (!isOpen) {
+        btn.classList.add('open');
+        answer.classList.add('open');
+      }
+    }
+  </script>
+
+
+</body></html>
